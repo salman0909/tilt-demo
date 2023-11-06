@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world
+spec:
+  selector:
+    matchLabels:
+      app: hello-world
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      imagePullSecrets:
+        # Reference the Secret described in the .yaml found below
+        - name: regcred
+      containers:
+      - name: hello-world
+        image: salman1091/hello-world
+        imagePullPolicy: Always
+        ports:
+        - name: hello-world
+          containerPort: 8080
+        resources: {}
